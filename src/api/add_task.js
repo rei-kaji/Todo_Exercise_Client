@@ -7,7 +7,12 @@ export const addTask = async (taskData) => {
 		const response = await axios.post(`${hostUrl}add`, taskData);
 		return response.data;
 	} catch (error) {
-		console.error('Failed to add task:', error.message);
-		throw error;
+		if (error.response && error.response.status === 409) {
+			return error.response.data;
+		} else {
+			const errorMessage = 'Failed to add task';
+			console.error(errorMessage, error.message);
+			throw new Error(errorMessage);
+		}
 	}
 };

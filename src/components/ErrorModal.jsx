@@ -1,24 +1,13 @@
 import React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { deleteAllTasks } from '../api';
 
-const DeleteModal = ({ isOpen, setIsConfirmationOpen, setTasks }) => {
-	const handleDeleteAllCancel = () => {
-		setIsConfirmationOpen(false);
-	};
-
-	const handleDeleteAllConfirm = () => {
-		// Call the API that delete all tasks from MongoDB
-		deleteAllTasks();
-		setTasks([]);
-		setIsConfirmationOpen(false);
-	};
+const ErrorModal = ({ isOpen, handleClose, errorMessage }) => {
 	return (
 		<Transition show={isOpen}>
 			<Dialog
 				as="div"
 				className="fixed inset-0 z-10 overflow-y-auto"
-				onClose={handleDeleteAllCancel}
+				onClose={handleClose}
 			>
 				<div className="min-h-screen px-4 text-center">
 					<Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -35,27 +24,20 @@ const DeleteModal = ({ isOpen, setIsConfirmationOpen, setTasks }) => {
 							as="h3"
 							className="text-lg font-medium leading-6 text-gray-900 mb-4"
 						>
-							Delete All Tasks
+							Error Messages
 						</Dialog.Title>
 
 						<div className="mt-2 mb-6 text-gray-500">
-							<p>Are you sure you want to delete all tasks?</p>
+							<p>{errorMessage}</p>
 						</div>
 
 						<div className="mt-4 flex justify-end">
 							<button
 								type="button"
 								className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-blue-600 text-white border border-transparent rounded-md hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500 mr-4"
-								onClick={handleDeleteAllCancel}
+								onClick={handleClose}
 							>
-								Cancel
-							</button>
-							<button
-								type="button"
-								className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-								onClick={handleDeleteAllConfirm}
-							>
-								Delete All
+								Close
 							</button>
 						</div>
 					</div>
@@ -65,4 +47,4 @@ const DeleteModal = ({ isOpen, setIsConfirmationOpen, setTasks }) => {
 	);
 };
 
-export default DeleteModal;
+export default ErrorModal;

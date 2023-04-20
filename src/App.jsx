@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import DeleteModal from './components/DeleteModal';
 import { getAllTasks } from '../src/api';
 import AddTask from './components/AddTask';
@@ -11,17 +11,17 @@ function App() {
 	const [checkedTasks, setCheckedTasks] = useState([]);
 	const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
-	const updateTasks = async () => {
-		// Get all tasks from MongoDB after updating the checked status of a task
-		let updatedTasks = await getAllTasks();
-		// sort the tasks by name
-		updatedTasks.sort((a, b) => a.name.localeCompare(b.name));
-		setTasks(updatedTasks);
-	};
+	const updateTasks = useCallback(async () => {
+		try {
+			const updatedTasks = await getAllTasks();
+			updatedTasks.sort((a, b) => a.name.localeCompare(b.name));
+			setTasks(updatedTasks);
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
 
-	const handleDeleteAll = () => {
-		setIsConfirmationOpen(true);
-	};
+	const handleDeleteAll = () => setIsConfirmationOpen(true);
 
 	useEffect(() => {
 		updateTasks();
