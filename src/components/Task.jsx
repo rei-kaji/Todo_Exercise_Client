@@ -38,7 +38,9 @@ const Task = ({ id, name, checkedFlg, updateTasks }) => {
 						checked={checkedFlg}
 						onChange={handleCheckTask}
 					/>
-					<span className="ml-3 text-xl">{name}</span>
+					<span className="ml-3 text-xl">
+						{name.length > 25 ? name.slice(0, 25) + '...' : name}
+					</span>
 				</label>
 				<button className="h-6 w-6" onClick={handleDeleteTask}>
 					<TrashIcon />
