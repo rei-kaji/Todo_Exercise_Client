@@ -1,5 +1,6 @@
 import React from 'react';
-import { updateTask } from '../api';
+import { updateTask, deleteTask } from '../api';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 const Task = ({ id, name, checkedFlg, updateTasks }) => {
 	const handleCheckTask = async (event) => {
@@ -15,17 +16,34 @@ const Task = ({ id, name, checkedFlg, updateTasks }) => {
 		}
 	};
 
+	const handleDeleteTask = async () => {
+		try {
+			// Call the API that delete a task in MongoDB
+			await deleteTask(id);
+			// alert(id);
+
+			updateTasks();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<>
-			<label className="inline-flex items-center mt-5">
-				<input
-					type="checkbox"
-					className="form-checkbox h-6 w-6 cursor-pointer"
-					checked={checkedFlg}
-					onChange={handleCheckTask}
-				/>
-				<span className="ml-3 text-xl">{name}</span>
-			</label>
+			<div className="flex justify-between mt-5">
+				<label className="inline-flex items-center">
+					<input
+						type="checkbox"
+						className="form-checkbox h-6 w-6 cursor-pointer"
+						checked={checkedFlg}
+						onChange={handleCheckTask}
+					/>
+					<span className="ml-3 text-xl">{name}</span>
+				</label>
+				<button className="h-6 w-6" onClick={handleDeleteTask}>
+					<TrashIcon />
+				</button>
+			</div>
 		</>
 	);
 };
