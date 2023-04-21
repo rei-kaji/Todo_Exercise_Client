@@ -11,7 +11,7 @@ A web application that allows users to manage their tasks and to-do lists. This 
 
 ## Overview
 
-![Screenshot of the application](images/app_image.png)
+![Screenshot of the application](/public/images/app_image.png)
 This project is a web application that allows users to manage their tasks and to-do lists. The client-side code is built using React, and communicates with a RESTful API implemented on the server-side. The application allows users to create, read, update, and delete tasks.
 
 ## Getting Started
