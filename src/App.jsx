@@ -21,17 +21,26 @@ function App() {
 		}
 	}, []);
 
+	// Set unCheckedTasks and checkedTasks from tasks
+	const checkTask = useCallback(async () => {
+		try {
+			const newTasks = [...tasks];
+			setCheckedTasks(newTasks.filter((task) => task.checked).slice(0, 10));
+			setUnCheckedTasks(newTasks.filter((task) => !task.checked));
+		} catch (error) {
+			console.log(error);
+		}
+	}, [tasks]);
+
 	const handleDeleteAll = () => setIsConfirmationOpen(true);
 
 	useEffect(() => {
 		updateTasks();
+		checkTask();
 	}, []);
 
 	useEffect(() => {
-		// Set unCheckedTasks and checkedTasks from tasks
-		const newTasks = [...tasks];
-		setCheckedTasks(newTasks.filter((task) => task.checked).slice(0, 10));
-		setUnCheckedTasks(newTasks.filter((task) => !task.checked));
+		checkTask();
 	}, [tasks]);
 
 	return (
