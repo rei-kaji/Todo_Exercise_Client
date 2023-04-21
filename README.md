@@ -30,20 +30,28 @@ To set up the development environment, you need to have Node.js and npm installe
 
 1. Clone or download the repository.
 
+```bash
 git clone https://github.com/rei-kaji/Todo_Exercise_Client.git
+```
 
 2. Install the required dependencies.
 
+```bash
 npm install
+```
 
 ## Usage
 
 To start the development server, run the following command:
 
+```bash
 npm start
+```
 
 This will start the development server on http://localhost:3000.
 
 To build the production-ready code, run the following command:
 
+```bash
 npm run build
+```
