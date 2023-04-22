@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 // When running locally, use the following line
-// const hostUrl = 'http://localhost:8080/api/todo/';
-
-// When running on Render, use the following line
-const hostUrl = 'https://todo-exercise-server.onrender.com/api/todo/';
+const hostUrl = 'http://localhost:8080/api/todo/';
 
 export const addTask = async (taskData) => {
 	try {
