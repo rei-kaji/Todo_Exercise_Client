@@ -39,7 +39,7 @@ npm install
 
 ## Usage
 
-<h4>Please start the server application server before starting this client application server.</br></h2>
+<h4>Please start the server application server before starting this client application server.</h2>
 
 [Todo Exercise Server](https://github.com/rei-kaji/Todo_Exercise_Server)
 
