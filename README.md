@@ -39,6 +39,9 @@ npm install
 
 ## Usage
 
+<span style="color:red">Please start the server application server before starting this client application server.</span>
+[Todo Exercise Server](https://github.com/rei-kaji/Todo_Exercise_Server)
+
 To start the development server, run the following command:
 
 ```bash
