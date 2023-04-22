@@ -7,9 +7,8 @@ const Task = ({ id, name, checkedFlg, updateTasks }) => {
 		try {
 			const checked = event.target.checked;
 
-			// Call the API that update the checked status of a task in MongoDB
+			// Call the API that update the checked status of a task in MongoDB and update the tasks
 			await updateTask(id, checked);
-
 			updateTasks();
 		} catch (error) {
 			console.error(error);
@@ -18,10 +17,8 @@ const Task = ({ id, name, checkedFlg, updateTasks }) => {
 
 	const handleDeleteTask = async () => {
 		try {
-			// Call the API that delete a task in MongoDB
+			// Call the API that delete a task in MongoDB and update the tasks
 			await deleteTask(id);
-			// alert(id);
-
 			updateTasks();
 		} catch (error) {
 			console.error(error);

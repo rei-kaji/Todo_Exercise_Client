@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import DeleteModal from './components/DeleteModal';
 import { getAllTasks } from '../src/api';
+import DeleteModal from './components/DeleteModal';
 import AddTask from './components/AddTask';
 import Search from './components/Search';
 import Tasks from './components/Tasks';
@@ -11,36 +11,40 @@ function App() {
 	const [checkedTasks, setCheckedTasks] = useState([]);
 	const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
+	const handleDeleteAll = () => setIsConfirmationOpen(true);
+
+	// Get all tasks from MongoDB and update the tasks
 	const updateTasks = useCallback(async () => {
 		try {
 			const updatedTasks = await getAllTasks();
+			// sort the tasks from A to Z by name
 			updatedTasks.sort((a, b) => a.name.localeCompare(b.name));
 			setTasks(updatedTasks);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, []);
 
 	// Set unCheckedTasks and checkedTasks from tasks
-	const checkTask = useCallback(async () => {
+	const divideTasks = useCallback(() => {
 		try {
 			const newTasks = [...tasks];
 			setCheckedTasks(newTasks.filter((task) => task.checked).slice(0, 10));
 			setUnCheckedTasks(newTasks.filter((task) => !task.checked));
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [tasks]);
 
-	const handleDeleteAll = () => setIsConfirmationOpen(true);
-
+	// Call updateTasks and divideTasks when the component is mounted
 	useEffect(() => {
 		updateTasks();
-		checkTask();
+		divideTasks();
 	}, []);
 
+	// Call divideTasks when tasks is updated
 	useEffect(() => {
-		checkTask();
+		divideTasks();
 	}, [tasks]);
 
 	return (
@@ -55,7 +59,7 @@ function App() {
 				</button>
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 mt-10 sm:gap-16">
-				<AddTask />
+				<AddTask updateTasks={updateTasks} />
 				<Search updateTasks={updateTasks} setTasks={setTasks} />
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 mt-10 gap-16">

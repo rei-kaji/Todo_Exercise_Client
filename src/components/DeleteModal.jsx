@@ -8,7 +8,7 @@ const DeleteModal = ({ isOpen, setIsConfirmationOpen, setTasks }) => {
 	};
 
 	const handleDeleteAllConfirm = () => {
-		// Call the API that delete all tasks from MongoDB
+		// Call the API that delete all tasks from MongoDB and Update the task list
 		deleteAllTasks();
 		setTasks([]);
 		setIsConfirmationOpen(false);
